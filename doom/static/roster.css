@@ -1,0 +1,29 @@
+table, th, td {
+    border: 2px solid black;
+}
+
+.titles {
+    background-color: #38761d;
+    color: #f1c232;
+}
+
+.rank {
+    background-color: #434343;
+    color: #f1c232;
+}
+
+.member {
+    background-color: #6aa84f;
+    color: #000000;
+}
+
+body {
+    background-color: #084606;
+    font-family: 'Carter One', cursive;
+}
+
+th {
+    text-align: center;
+    vertical-align: center;
+}
+
