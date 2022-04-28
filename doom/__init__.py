@@ -11,12 +11,11 @@ from flask_pyoidc.flask_pyoidc import OIDCAuthentication
 from flask_pyoidc.provider_configuration import ProviderConfiguration, ClientMetadata
 from flask import Flask, render_template, send_from_directory, redirect, url_for, g, request, abort
 from flask_migrate import Migrate
-from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_login import login_user, logout_user, login_required, LoginManager, current_user
 import time
-
+import sys
 
 
 # Setting up Flask and csrf token for forms.
@@ -32,7 +31,6 @@ else:
 # Establish SQL Database
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-socketio = SocketIO(app)
 
 # OIDC Authentication
 GOOGLE_AUTH = ProviderConfiguration(issuer=app.config["GOOGLE_ISSUER"],
@@ -54,9 +52,9 @@ login_manager.login_view = 'login'
 commit = check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('utf-8').rstrip()
 
 # pylint: disable=wrong-import-position
-from .models import User, Room
-from .forms import ColorForm, RoomForm
-from .utils import csh_user_auth
+from .models import Member
+from .utils import google_user_auth
+from .user import User
 
 # time setup for the server side time
 eastern = pytz.timezone('America/New_York')
@@ -70,10 +68,7 @@ def favicon():
 
 @login_manager.user_loader
 def load_user(user_id):
-    q = User.query.get(user_id)
-    if q:
-        return q
-    return None
+    return User(user_id)
 
 @app.route("/logout")
 @auth.oidc_logout
@@ -97,33 +92,32 @@ def google_auth(auth_dict=None):
 @login_required
 def index():
     members = list(Member.query.all())
-    ranks = {
-        "CMD": filter(lambda member: member.rank == "CMD", members),
-        "XO": filter(lambda member: member.rank == "XO", members),
-
-        "COL": filter(lambda member: member.rank == "COL", members),
-        "LTC": filter(lambda member: member.rank == "LTC", members),
-        "MAJ": filter(lambda member: member.rank == "MAJ", members),
-
-        "CPT": filter(lambda member: member.rank == "CPT", members),
-        "1stLT": filter(lambda member: member.rank == "1stLT", members),
-        "2ndLT": filter(lambda member: member.rank == "2ndLT", members),
-
-        "SMB": filter(lambda member: member.rank == "SMB", members),
-
-        "CSM": filter(lambda member: member.rank == "CSM", members),
-        "SGM": filter(lambda member: member.rank == "SGM", members),
-        "1SG": filter(lambda member: member.rank == "1SG", members),
-        "MSG": filter(lambda member: member.rank == "MSG", members),
-        "SFC": filter(lambda member: member.rank == "SFC", members),
-        "SSG": filter(lambda member: member.rank == "SSG", members),
-        "SGT": filter(lambda member: member.rank == "SGT", members),
-
-        "CPL": filter(lambda member: member.rank == "CPL", members),
-        "LCPL": filter(lambda member: member.rank == "LCPL", members),
-        "PFC": filter(lambda member: member.rank == "PFC", members),
-        "PVT": filter(lambda member: member.rank == "PVT", members)
-    }
-    
-    return render_template('roster.html', ranks=ranks, commit=commit)
+    print("Members:", members, file=sys.stderr)
+    rank_list = [
+        ("CMD", "COMMANDER DOOM"),
+        ("XO", "EXECUTIVE OFFICER"),
+        ("COL", "COLONEL"),
+        ("LTC", "LIEUTENANT COLONEL"),
+        ("MAJ", "MAJOR"),
+        ("CPT", "CAPTAIN"),
+        ("1stLT", "FIRST LIEUTENANT"),
+        ("2ndLT", "SECOND LIEUTENANT"),
+        ("SMB", "SERGEANT MAJOR OF THE BATTALION"),
+        ("CSM", "COMMAND SERGEANT MAJOR"),
+        ("SGM", "SERGEANT MAJOR"),
+        ("1SG", "FIRST SERGEANT"),
+        ("MSG", "MASTER SERGEANT"),
+        ("SFC", "SERGEANT FIRST CLASS"),
+        ("SSG", "STAFF SERGEANT"),
+        ("SGT", "SERGEANT"),
+        ("CPL", "CORPORAL"),
+        ("LCPL", "LANCE CORPORAL"),
+        ("PFC", "PRIVATE FIRST CLASS"),
+        ("PVT", "PRIVATE")
+    ]
+    ranks = {}
+    for rank in rank_list:
+        ranks[rank[0]] = list(filter(lambda member: member.rank==rank[0], members))
+        print(rank,list(ranks[rank[0]]), file=sys.stderr)
+    return render_template('roster.html', xo=ranks["XO"], rank_list=rank_list, ranks=ranks, commit=commit)
 

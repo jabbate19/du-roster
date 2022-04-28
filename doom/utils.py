@@ -8,12 +8,12 @@ def google_user_auth(func):
         uid = str(session["userinfo"].get("sub", ""))
         last = str(session["userinfo"].get("family_name", ""))
         first = str(session["userinfo"].get("given_name", ""))
-        picture = str(session["userinfo"].get("picture", ""))
+        email = str(session["userinfo"].get("email", ""))
         auth_dict = {
             "first": first,
             "last": last,
             "uid": uid,
-            "picture": picture
+            "email": email,
         }
         kwargs["auth_dict"] = auth_dict
         return func(*args, **kwargs)
