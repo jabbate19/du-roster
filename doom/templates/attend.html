@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+  <div class="bs-component">
+    <h1 class="display-4 mt-4">Attendance</h1>
+      <hr class="my-4">
+      <div class="container">
+        <form action="" method="post">
+          <fieldset>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Event You Attended</label></h5>
+              <div>{{ form.event() }}</div>
+              {% for error in form.event.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+          {{ form.submit(class="btn btn-primary btn-sm btn-block")}}
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

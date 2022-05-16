@@ -27,3 +27,11 @@ th {
     vertical-align: center;
 }
 
+.navbar, .navbar-brand, .nav-link {
+    background-color: #434343;
+    color: #f1c232;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #000000;
+}

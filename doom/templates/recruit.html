@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+  <div class="bs-component">
+    <h1 class="display-4 mt-4">Recruit New Member</h1>
+      <hr class="my-4">
+      <div class="container">
+        <form action="" method="post">
+          <fieldset>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group row", id="name">
+              <h5><label class="col col-form-label" for="name">Recruit's Name</label></h5>
+              <div class="col">{{ form.name(class="col col-form-label", value=name) }}</div>
+              {% for error in form.name.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row", id="steamid">
+              <h5><label class="col col-form-label" for="steamid">Recruit's SteamID</label></h5>
+              <div class="col">{{ form.steamid(class="col col-form-label") }}</div>
+              {% for error in form.steamid.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row", id="discordid">
+              <h5><label class="col col-form-label" for="discordid">Recruit's DiscordID</label></h5>
+              <div class="col">{{ form.discordid(class="col col-form-label") }}</div>
+              {% for error in form.discordid.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row", id="email">
+              <h5><label class="col col-form-label" for="email">Recruit's Email</label></h5>
+              <div class="col">{{ form.email(class="col col-form-label") }}</div>
+              {% for error in form.email.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row", id="rank">
+              <h5><label class="col col-form-label" for="rank">Recruit's New Rank</label></h5>
+              <div>{{ form.new_rank() }}</div>
+              {% for error in form.new_rank.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+          {{ form.submit(class="btn btn-primary btn-sm btn-block")}}
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

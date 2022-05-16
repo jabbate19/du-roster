@@ -1,0 +1,36 @@
+{% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+  <div class="bs-component">
+    <h1 class="display-4 mt-4">Observation</h1>
+      <hr class="my-4">
+      <div class="container">
+        <form action="" method="post">
+          <fieldset>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Trooper Being Observed</label></h5>
+              <div>{{ form.observee() }}</div>
+              {% for error in form.observee.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Training or Recruitment?</label></h5>
+              <div>{{ form.event_type() }}</div>
+              {% for error in form.event_type.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Rating from 1 to 10</label></h5>
+              <div>{{ form.rating() }}</div>
+              {% for error in form.rating.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Notes from Observation</label></h5>
+              <div>{{ form.notes() }}</div>
+              {% for error in form.notes.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+          {{ form.submit(class="btn btn-primary btn-sm btn-block")}}
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

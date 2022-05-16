@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+  <div class="bs-component">
+    <h1 class="display-4 mt-4">Promotion/Demotion</h1>
+      <hr class="my-4">
+      <div class="container">
+        <form action="" method="post">
+          <fieldset>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Trooper Being Promoted/Demoted</label></h5>
+              <div>{{ form.promotee() }}</div>
+              {% for error in form.promotee.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">New Rank</label></h5>
+              <div>{{ form.new_rank() }}</div>
+              {% for error in form.new_rank.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Reason</label></h5>
+              <div>{{ form.reason() }}</div>
+              {% for error in form.reason.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+          {{ form.submit(class="btn btn-primary btn-sm btn-block")}}
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

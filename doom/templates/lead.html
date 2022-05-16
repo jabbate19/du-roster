@@ -1,0 +1,26 @@
+{% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+  <div class="bs-component">
+    <h1 class="display-4 mt-4">Event Lead</h1>
+      <hr class="my-4">
+      <div class="container">
+        <form action="" method="post">
+          <fieldset>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">After Action Report Link</label></h5>
+              <div class="col">{{ form.after_action(class="col col-form-label") }}</div>
+              {% for error in form.after_action.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+            <div class="form-group row">
+              <h5><label class="col col-form-label">Number of Troopers in Attendance</label></h5>
+              <div>{{ form.number_in_attendance() }}</div>
+              {% for error in form.number_in_attendance.errors %} <div class="alert alert-danger">{{ error }}</div> {% endfor %}
+            </div>
+          {{ form.submit(class="btn btn-primary btn-sm btn-block")}}
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

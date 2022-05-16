@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Joe Abbate">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>DU Roster</title>
+    <link rel="icon" href="">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/roster.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand abs nav" href="/">Doom's Unit Roster</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link" href="/subclass">Subclasses</a>
+            </li>
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user01">
+                Subdivisions
+              </a>
+              <div class="dropdown-menu">
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="/horncompany">Horn Company</a>
+                <a class="dropdown-item" href="/siegesquad">Siege Squad</a>
+              </div>
+            </li>
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user01">
+                PVT+
+              </a>
+              <div class="dropdown-menu">
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="/attend">Attendance</a>
+                <a class="dropdown-item" href="/loa">LOA/ROA</a>
+              </div>
+            </li>
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user01">
+                SGT+
+              </a>
+              <div class="dropdown-menu">
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="/recruit">Recruitment</a>
+                <a class="dropdown-item" href="/train">Training</a>
+                <a class="dropdown-item" href="/lead">Event Lead</a>
+              </div>
+            </li>
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user01">
+                2ndLT+
+              </a>
+              <div class="dropdown-menu">
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="/promote">Promotion/Demotion</a>
+                <a class="dropdown-item" href="/discharge">Discharge</a>
+              </div>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item navbar-user dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user01">
+                Dropdown
+              </a>
+              <div class="dropdown-menu">
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="250" viewBox="0 0 200 250" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="13" style="font-weight:bold;font-size:13pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>
+</html>
